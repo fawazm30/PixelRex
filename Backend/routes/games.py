@@ -6,13 +6,13 @@ games_bp = Blueprint('games', __name__)
 
 def build_game_query(filters):
     query = Game.query
-    if 'genre' in filters and filters ['genre']:
+    if 'genre' in filters and filters['genre']:
         query = query.filter(Game.genre.ilike(f"%{filters['genre']}%"))
-    if 'title' in filters and filters ['title']:
+    if 'title' in filters and filters['title']:
         query = query.filter(Game.title.ilike(f"%{filters['title']}%"))
-    if 'price' in filters and filters ['price']:
+    if 'price' in filters and filters['price']:
         query = query.filter(Game.price == filters['price'])
-    if 'rating' in filters and filters ['rating']:
+    if 'rating' in filters and filters['rating']:
         query = query.filter(Game.rating.ilike(f"%{filters['rating']}%"))
     return query
 
@@ -58,10 +58,10 @@ def search_games():
 
         if not query:
             return jsonify({"error": "Search query is required"}), 400
-        game_query = Game.query.filter(
-            Game.title.ilike(f"%{query}%") | Game.genre.ilike(f"%{query}%")
-        ).paginate(page=page, per_page=limit, error_out=False)
-
+        
+        # Fetch games matching the genre with pagination
+        game_query = Game.query.filter(Game.genre.ilike(f"%{query}%")).paginate(page=page, per_page=limit, error_out=False)
+        
         games = [{
             "id": game.id,
             "title": game.title,
