@@ -10,17 +10,23 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  late Future<List<Game>> futureGames;
+  late Future<Map<String, dynamic>> futureGames;
+  int totalPages = 1;
 
   @override
   void initState() {
     super.initState();
-    futureGames = Future.value([]); // Initialize with an empty list
+    futureGames = Future.value({'games': [], 'total_pages': 1}); // Initialize with an empty list
   }
 
   void _searchGames(String query) {
     setState(() {
-      futureGames = ApiService.fetchGamesByTitle(query); // Fetch games by title
+      futureGames = ApiService.fetchGamesByTitle(query, page: 1);
+      futureGames.then((result) {
+        setState(() {
+          totalPages = result['total_pages'];
+        });
+      });
     });
   }
 
@@ -45,18 +51,19 @@ class _SearchScreenState extends State<SearchScreen> {
           },
         ),
       ),
-      body: FutureBuilder<List<Game>>(
+      body: FutureBuilder<Map<String, dynamic>>(
         future: futureGames,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          } else if (!snapshot.hasData || snapshot.data!['games'].isEmpty) {
             return Center(child: Text('No games found.'));
           } else {
+            List<Game> games = snapshot.data!['games'];
             return ListView(
-              children: snapshot.data!.map((game) {
+              children: games.map((game) {
                 return GameCard(game: game); // Pass the Game object
               }).toList(),
             );

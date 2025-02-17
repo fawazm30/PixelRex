@@ -9,10 +9,10 @@ class FeaturedScreen extends StatefulWidget {
 }
 
 class _FeaturedScreenState extends State<FeaturedScreen> {
-  late Future<List<Game>> actionGames;
-  late Future<List<Game>> multiplayerGames;
-  late Future<List<Game>> freeToPlayGames;
-  late Future<List<Game>> horrorGames;
+  late Future<Map<String, dynamic>> actionGames;
+  late Future<Map<String, dynamic>> multiplayerGames;
+  late Future<Map<String, dynamic>> freeToPlayGames;
+  late Future<Map<String, dynamic>> horrorGames;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
     horrorGames = ApiService.fetchGamesByGenre('Horror');
   }
 
-  Widget buildCategory(String title, Future<List<Game>> futureGames) {
+  Widget buildCategory(String title, Future<Map<String, dynamic>> futureGames) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,20 +34,21 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        FutureBuilder<List<Game>>(
+        FutureBuilder<Map<String, dynamic>>(
           future: futureGames,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            } else if (!snapshot.hasData || snapshot.data!['games'].isEmpty) {
               return Center(child: Text('No games found.'));
             } else {
+              List<Game> games = snapshot.data!['games'];
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: snapshot.data!.map((game) {
+                  children: games.map((game) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GameCard(game: game),

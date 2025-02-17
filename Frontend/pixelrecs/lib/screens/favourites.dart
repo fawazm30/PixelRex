@@ -20,7 +20,7 @@ class _FavoritesScreenState extends State<FavouritesScreen> {
   // Simulate fetching favorite games (replace with actual logic)
   Future<List<Game>> _fetchFavorites() async {
     // For now, fetch all games and filter favorites
-    List<Game> allGames = await ApiService.fetchGames();
+    List<Game> allGames = (await ApiService.fetchGames())['games'];
     return allGames.where((game) => game.rating == "Very Positive").toList(); // Example filter
   }
 
