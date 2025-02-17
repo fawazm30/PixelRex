@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/gamecard.dart';
-import '../services/api_service.dart';
+import '../services/favourite_service.dart'; // Updated import for our new service
 import '../models/game.dart';
 
 class FavouritesScreen extends StatefulWidget {
@@ -14,14 +14,8 @@ class _FavoritesScreenState extends State<FavouritesScreen> {
   @override
   void initState() {
     super.initState();
-    futureFavorites = _fetchFavorites(); // Fetch favorite games
-  }
-
-  // Simulate fetching favorite games (replace with actual logic)
-  Future<List<Game>> _fetchFavorites() async {
-    // For now, fetch all games and filter favorites
-    List<Game> allGames = (await ApiService.fetchGames())['games'];
-    return allGames.where((game) => game.rating == "Very Positive").toList(); // Example filter
+    // Fetch favorite games from persistent storage
+    futureFavorites = FavoritesService.getFavorites();
   }
 
   @override
@@ -41,9 +35,7 @@ class _FavoritesScreenState extends State<FavouritesScreen> {
             return Center(child: Text('No favorite games found.'));
           } else {
             return ListView(
-              children: snapshot.data!.map((game) {
-                return GameCard(game: game); // Pass the Game object
-              }).toList(),
+              children: snapshot.data!.map((game) => GameCard(game: game)).toList(),
             );
           }
         },
