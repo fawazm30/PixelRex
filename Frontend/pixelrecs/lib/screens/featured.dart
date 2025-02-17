@@ -9,35 +9,72 @@ class FeaturedScreen extends StatefulWidget {
 }
 
 class _FeaturedScreenState extends State<FeaturedScreen> {
-  late Future<List<Game>> futureGames;
+  late Future<List<Game>> actionGames;
+  late Future<List<Game>> multiplayerGames;
+  late Future<List<Game>> freeToPlayGames;
+  late Future<List<Game>> horrorGames;
 
   @override
   void initState() {
     super.initState();
-    futureGames = ApiService.fetchGames(); // Fetch games when the screen loads
+    actionGames = ApiService.fetchGamesByGenre('Action');
+    multiplayerGames = ApiService.fetchGamesByGenre('Multiplayer');
+    freeToPlayGames = ApiService.fetchGamesByGenre('Free to Play');
+    horrorGames = ApiService.fetchGamesByGenre('Horror');
+  }
+
+  Widget buildCategory(String title, Future<List<Game>> futureGames) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+        FutureBuilder<List<Game>>(
+          future: futureGames,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return Center(child: Text('No games found.'));
+            } else {
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: snapshot.data!.map((game) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GameCard(game: game),
+                    );
+                  }).toList(),
+                ),
+              );
+            }
+          },
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Game>>(
-        future: futureGames,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator()); // Show loading spinner
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}')); // Show error message
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No games found.')); // Show empty state
-          } else {
-            // Display the list of games
-            return ListView(
-              children: snapshot.data!.map((game) {
-                return GameCard(game: game); // Pass the Game object
-              }).toList(),
-            );
-          }
-        },
+      appBar: AppBar(
+        title: Text('Featured Games'),
+      ),
+      body: ListView(
+        children: [
+          buildCategory('Action', actionGames),
+          buildCategory('Multiplayer', multiplayerGames),
+          buildCategory('Free to Play', freeToPlayGames),
+          buildCategory('Horror', horrorGames),
+        ],
       ),
     );
   }
