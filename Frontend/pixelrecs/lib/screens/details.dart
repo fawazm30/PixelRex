@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/game.dart';
+import '../services/favourite_service.dart'; // Import the service
 
 class GameDetailsScreen extends StatelessWidget {
   final Game game;
@@ -13,7 +14,7 @@ class GameDetailsScreen extends StatelessWidget {
         title: Text(game.title ?? 'Game Details'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,8 +45,11 @@ class GameDetailsScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                // Add logic to save the game to favorites
+              onPressed: () async {
+                await FavoritesService.addFavorite(game);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Added to favorites"))
+                );
               },
               child: Text("Add to Favorites"),
             ),

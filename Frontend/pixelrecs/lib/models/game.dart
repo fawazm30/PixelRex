@@ -1,14 +1,12 @@
 class Game {
-  final int? id;
   final String? title;
+  final String? imageUrl;
   final String? genre;
   final String? rating;
   final String? releaseDate;
   final String? description;
-  final String? imageUrl;
 
   Game({
-    this.id,
     this.title,
     this.genre,
     this.rating,
@@ -17,16 +15,28 @@ class Game {
     this.imageUrl,
   });
 
-  // Convert JSON data into a Game object
+
+  // Convert a Game object to a Map (for JSON encoding)
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'imageUrl': imageUrl,
+      'genre': genre,
+      'rating': rating,
+      'releaseDate': releaseDate,
+      'description': description,
+    };
+  }
+
+  // Convert a JSON Map to a Game object
   factory Game.fromJson(Map<String, dynamic> json) {
     return Game(
-      id: json['id'],
       title: json['title'],
+      imageUrl: json['image_url'],
       genre: json['genre'],
       rating: json['rating'],
-      releaseDate: json['release_date'],
+      releaseDate: json['releaseDate'],
       description: json['description'],
-      imageUrl: json['image_url'],
     );
   }
 }
