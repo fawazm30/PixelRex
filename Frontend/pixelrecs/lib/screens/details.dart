@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/game.dart';
-import '../services/favourite_service.dart'; // Import the service
+import '../services/favourite_service.dart';
 
 class GameDetailsScreen extends StatelessWidget {
   final Game game;

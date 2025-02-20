@@ -79,19 +79,19 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       child: TextButton(
         onPressed: () => _onPageSelected(page),
-        child: Text(
-          page.toString(),
-          style: TextStyle(
-            color: currentPage == page ? Colors.white : Colors.blue,
-            fontWeight: currentPage == page ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
         style: TextButton.styleFrom(
           backgroundColor: currentPage == page ? Colors.blue : Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        ),
+        child: Text(
+          page.toString(),
+          style: TextStyle(
+            color: currentPage == page ? Colors.white : Colors.blue,
+            fontWeight: currentPage == page ? FontWeight.bold : FontWeight.normal,
+          ),
         ),
       ),
     );
