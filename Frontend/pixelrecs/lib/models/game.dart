@@ -20,7 +20,7 @@ class Game {
   Map<String, dynamic> toJson() {
     return {
       'title': title,
-      'imageUrl': imageUrl,
+      'image_url': imageUrl,
       'genre': genre,
       'rating': rating,
       'releaseDate': releaseDate,
