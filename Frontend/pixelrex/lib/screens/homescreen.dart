@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PixelRecs'),
+        title: const Text('PixelRex'),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
