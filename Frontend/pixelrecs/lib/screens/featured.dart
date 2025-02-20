@@ -51,7 +51,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
                   children: games.map((game) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: GameCard(game: game),
+                      child: GameCard(game: game, width: 160),
                     );
                   }).toList(),
                 ),

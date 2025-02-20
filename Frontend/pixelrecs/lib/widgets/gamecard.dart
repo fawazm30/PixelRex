@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import '../models/game.dart'; // Import the Game model
-import '../screens/details.dart'; // Import the GameDetailScreen
+import '../models/game.dart';
+import '../screens/details.dart';
 
 class GameCard extends StatelessWidget {
-  final Game game; // Accept a Game object
+  final Game game;
+  final double? width;
 
-  GameCard({required this.game}); // Require the Game object
+  GameCard({
+    required this.game,
+    this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +18,12 @@ class GameCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => GameDetailsScreen(game: game), // Navigate to GameDetailScreen
+            builder: (context) => GameDetailsScreen(game: game),
           ),
         );
       },
       child: Container(
-        width: 160, // Fixed width for horizontal scrolling
+        width: width,
         child: Card(
           margin: EdgeInsets.all(8),
           shape: RoundedRectangleBorder(
@@ -31,8 +35,8 @@ class GameCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
                 child: Image.network(
-                  game.imageUrl ?? 'https://via.placeholder.com/150', // Fallback image
-                  width: double.infinity,
+                  game.imageUrl ?? 'https://via.placeholder.com/150',
+                  width: width ?? double.infinity, // Use width parameter here if provided
                   height: 150,
                   fit: BoxFit.cover,
                 ),
@@ -43,7 +47,7 @@ class GameCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      game.title ?? 'Unknown Title', // Fallback title
+                      game.title ?? 'Unknown Title',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -58,12 +62,11 @@ class GameCard extends StatelessWidget {
                         SizedBox(width: 4),
                         Expanded(
                           child: Text(
-                            game.rating?.toString() ?? 'Unknown Rating', // Fallback rating
+                            game.rating?.toString() ?? 'Unknown Rating',
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[800],
                             ),
-                            maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -71,7 +74,7 @@ class GameCard extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "Release Date: ${game.releaseDate ?? 'Unknown Date'}", // Fallback release date
+                      "Release Date: ${game.releaseDate ?? 'Unknown Date'}",
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[600],
