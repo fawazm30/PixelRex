@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from database import db
 from models import Game
+from sqlalchemy import or_
 
 games_bp = Blueprint('games', __name__)
 
@@ -59,8 +60,13 @@ def search_games():
         if not query:
             return jsonify({"error": "Search query is required"}), 400
         
-        # Fetch games matching the genre with pagination
-        game_query = Game.query.filter(Game.genre.ilike(f"%{query}%")).paginate(page=page, per_page=limit, error_out=False)
+        # Search by both title and genre
+        game_query = Game.query.filter(
+            or_(
+                Game.title.ilike(f"%{query}%"),
+                Game.genre.ilike(f"%{query}%")
+            )
+        ).paginate(page=page, per_page=limit, error_out=False)
         
         games = [{
             "id": game.id,
