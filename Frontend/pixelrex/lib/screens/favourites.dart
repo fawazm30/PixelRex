@@ -32,7 +32,12 @@ class _FavoritesScreenState extends State<FavouritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favorites"),
+        title: Text("Your Favorites!", 
+        style: TextStyle(
+          fontFamily: 'SalmaproMedium',
+          fontSize: 20,
+          color: Color.fromARGB(255, 227, 0, 0)
+        )),
         actions: [
           IconButton(
             icon: Icon(Icons.delete),

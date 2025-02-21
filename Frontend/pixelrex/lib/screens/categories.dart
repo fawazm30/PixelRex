@@ -108,7 +108,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categories"),
+        title: Text("Categories",
+        style: TextStyle(
+          fontFamily: 'SalmaproMedium',
+          fontSize: 20,
+          color: Color.fromARGB(255, 227, 0, 0)
+        )),
       ),
       body: Column(
         children: [

@@ -31,7 +31,8 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+            fontFamily: 'SalmaproMedium'),
           ),
         ),
         FutureBuilder<Map<String, dynamic>>(
@@ -67,7 +68,12 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Featured Games'),
+        title: Text('Featured Games',
+        style: TextStyle(
+          fontFamily: 'SalmaproMedium',
+          fontSize: 20,
+          color: Color.fromARGB(255, 227, 0, 0)
+        )),
       ),
       body: ListView(
         children: [
