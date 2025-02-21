@@ -21,11 +21,14 @@ class GameDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              game.imageUrl ?? 'https://via.placeholder.com/150',
-              width: double.infinity,
-              height: 200,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                game.imageUrl ?? 'https://via.placeholder.com/150',
+                width: double.infinity,
+                height: 200,
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(height: 16),
             Text(
