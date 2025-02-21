@@ -63,7 +63,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: const Color.fromARGB(255, 203, 47, 36),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -87,7 +87,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             icon: Icon(
               Icons.arrow_forward,
               color: currentPage < totalPages 
-                  ? Theme.of(context).primaryColor 
+                  ? const Color.fromARGB(255, 203, 47, 36)
                   : Colors.grey.withOpacity(0.5),
             ),
             onPressed: currentPage < totalPages
@@ -124,7 +124,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   onPressed: () => _onGenreSelected(genre),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: selectedGenre == genre  // Changed from primary to backgroundColor
-                        ? Theme.of(context).primaryColor 
+                        ? const Color.fromARGB(255, 203, 47, 36) 
                         : Colors.grey.shade200,
                   ),
                   child: Text(

@@ -51,7 +51,9 @@ class GameDetailsScreen extends StatelessWidget {
                   SnackBar(content: Text("Added to favorites"))
                 );
               },
-              child: Text("Add to Favorites"),
+              child: Text(
+                "Add to Favorites",
+                style: TextStyle(color: Color.fromARGB(255, 227, 0, 0))),
             ),
           ],
         ),
