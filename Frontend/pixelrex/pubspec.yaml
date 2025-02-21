@@ -61,7 +61,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  
+  assets:
+    - assets/
 
+  fonts:
+    - family: RoSpritendo
+      fonts:
+        - asset: assets/RoSpritendo.otf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -99,3 +106,4 @@ flutter_native_splash:
 
   color: "#ffffff"
   image: "assets/splashicon.png"
+

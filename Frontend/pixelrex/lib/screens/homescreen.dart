@@ -22,7 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PixelRex'),
+        title: const Text('Welcome :3'
+        , style: TextStyle(
+          fontFamily: 'RoSpritendo',
+          fontSize: 20,
+          color: Color.fromARGB(255, 227, 0, 0)
+        )),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
