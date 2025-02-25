@@ -36,7 +36,7 @@ class GameCard extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
                 child: Image.network(
                   game.imageUrl ?? 'https://via.placeholder.com/150',
-                  width: width ?? double.infinity, // Use full width if not specified
+                  width: width ?? double.infinity, 
                   height: 150,
                   fit: BoxFit.cover,
                 ),

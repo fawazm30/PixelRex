@@ -18,7 +18,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    futureGames = Future.value({'games': [], 'total_pages': 1}); // Initialize with an empty list
+    futureGames = Future.value({'games': [], 'total_pages': 1}); 
   }
 
   void _searchGames(String query, {int page = 1}) {
@@ -78,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
               },
             ),
           ),
-          // Pagination Controls
+          //Pagination Controls
           if (totalPages > 1)
             Container(
               padding: EdgeInsets.symmetric(vertical: 10),

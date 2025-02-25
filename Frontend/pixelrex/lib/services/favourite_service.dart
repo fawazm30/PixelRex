@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/game.dart';
 
+//this script is specifically for the favourites page
 class FavoritesService {
   static const String favoritesKey = 'favorite_games';
 

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/game.dart';
 
 class ApiService {
-  static const String baseUrl = "http://127.0.0.1:5000"; //connects the backend to the frontend
+  static const String baseUrl = "http://127.0.0.1:5000"; //connects the backend to the frontend!!
 
   static Future<Map<String, dynamic>> fetchGames({int page = 1}) async {
     final response = await http.get(Uri.parse('$baseUrl/games?page=$page'));

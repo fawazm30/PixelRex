@@ -15,8 +15,6 @@ class Game {
     this.imageUrl,
   });
 
-
-  // Convert a Game object to a Map (for JSON encoding)
   Map<String, dynamic> toJson() {
     return {
       'title': title,
@@ -28,7 +26,6 @@ class Game {
     };
   }
 
-  // Convert a JSON Map to a Game object
   factory Game.fromJson(Map<String, dynamic> json) {
     return Game(
       title: json['title'],

@@ -10,7 +10,7 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   late Future<Map<String, dynamic>> futureGames;
-  String selectedGenre = "Action"; // Default selected genre
+  String selectedGenre = "Action"; 
   int currentPage = 1;
   int totalPages = 1;
 
@@ -32,7 +32,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   void _onGenreSelected(String genre) {
     setState(() {
       selectedGenre = genre;
-      currentPage = 1; // Reset to first page
+      currentPage = 1; 
       fetchGames();
     });
   }
@@ -128,7 +128,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 child: ElevatedButton(
                   onPressed: () => _onGenreSelected(genre),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: selectedGenre == genre  // Changed from primary to backgroundColor
+                    backgroundColor: selectedGenre == genre  
                         ? const Color.fromARGB(255, 203, 47, 36) 
                         : Colors.grey.shade200,
                   ),
