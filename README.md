@@ -13,7 +13,9 @@ For the backend of the app, I used Python, while for the frontend, I used dart, 
 6. The app should open on an iPhone simulator, and voila, my wonky app is now running right in front of your eyes. 
 
 # References:
-Steam data set: https://www.kaggle.com/datasets/wajihulhassan369/steam-games-dataset?resource=download&select=steam_cleaned.csv
+Steam data set: 
+
+https://www.kaggle.com/datasets/wajihulhassan369/steam-games-dataset?resource=download&select=steam_cleaned.csv
 
 Api key: rawg.io
 
